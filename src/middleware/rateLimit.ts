@@ -6,7 +6,7 @@ import { tryConsume, getBucketInfo } from "../services/rateLimitService";
  * For unauthenticated users, uses IP fallback key.
  */
 export function tokenBucketRateLimiter(req: Request, res: Response, next: NextFunction) {
-  const key = req.user?.username ?? req.ip;
+  const key = req.user?.username ?? req.ip ?? "";
   const result = tryConsume(key, 1);
 
   // Set helpful headers
