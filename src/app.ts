@@ -17,6 +17,13 @@ app.get("/", (req, res) => {
   res.json({ success: true, message: "Order Service API. See /api/auth and /api/orders" });
 });
 
+app.use('/info', (req , res) =>{
+  res.json({
+
+  })
+  
+});
+
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error("Unhandled error:", err);
   res.status(500).json({ success: false, message: "Internal Server Error" });

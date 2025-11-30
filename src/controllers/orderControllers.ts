@@ -19,22 +19,22 @@ export const viewOrders = (req: Request, res: Response) => {
 };
 
 export const updateOrder = (req: Request, res: Response) => {
-  const { orderId, status } = req.body;
-  if (!orderId || !status) {
-    return res.status(400).json({ success: false, message: "orderId and status required" });
+  const { id, status } = req.body;
+  if (!id || !status) {
+    return res.status(400).json({ success: false, message: "id and status required" });
   }
-  const idx = orders.findIndex((o) => o.id === Number(orderId));
+  const idx = orders.findIndex((o) => o.id === Number(id));
   if (idx === -1) return res.status(404).json({ success: false, message: "Order not found" });
   orders[idx].status = status;
   return res.json({ success: true, message: "Order updated", data: orders[idx] });
 };
 
 export const deleteOrder = (req: Request, res: Response) => {
-  const { orderId } = req.body;
-  if (!orderId) {
-    return res.status(400).json({ success: false, message: "orderId required" });
+  const { id } = req.body;
+  if (!id) {
+    return res.status(400).json({ success: false, message: "id required" });
   }
-  const idx = orders.findIndex((o) => o.id === Number(orderId));
+  const idx = orders.findIndex((o) => o.id === Number(id));
   if (idx === -1) return res.status(404).json({ success: false, message: "Order not found" });
   const removed = orders.splice(idx, 1)[0];
   return res.json({ success: true, message: "Order deleted", data: removed });
